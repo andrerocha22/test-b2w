@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(120deg, #f6d365, #dd4f27);
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  padding: 2rem;
+  font-size: 2rem;
+}
+
+.map-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.map-container #map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 600px;
+}

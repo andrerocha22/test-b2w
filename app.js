@@ -2,11 +2,14 @@
 
 const addressInput = document.querySelector(".address-input");
 const searchButton = document.querySelector(".search-button");
+const resultsContainer = document.querySelector(".results-container");
+// const userAddress = navigator.geolocation.getCurrentPosition((e) => {
+//   console.log(e.coords);
+// });
 
 //Event Listeners
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log("click");
   let address = addressInput.value;
   let addr = address.replace(/\s/g, "+");
   console.log(addr);
@@ -19,9 +22,7 @@ searchButton.addEventListener("click", (e) => {
   Http.onreadystatechange = function () {
     if (Http.status == 200 && Http.readyState == 4) {
       console.log(Http.response);
-      map.setCenter(Http.response.results[0].geometry.location);
-      map.setZoom(18);
-      marker.setPosition(Http.response.results[0].geometry.location);
+      addAddress(Http.response.results);
     }
   };
 });
@@ -40,4 +41,31 @@ function initMap() {
   });
 
   marker.setMap(map);
+}
+
+function addAddress(results) {
+  resultsContainer.innerHTML = "";
+
+  const resultsDiv = document.createElement("div");
+  resultsDiv.classList.add("results");
+
+  results.forEach((result) => {
+    const addressFormatted = document.createElement("h3");
+    addressFormatted.innerText = result.formatted_address;
+    addressFormatted.classList.add("address-formatted");
+
+    const buttonShowOnMap = document.createElement("button");
+    buttonShowOnMap.innerText = "Ver no mapa";
+    buttonShowOnMap.classList.add("button-show");
+    buttonShowOnMap.addEventListener("click", (e) => {
+      map.setCenter(result.geometry.location);
+      map.setZoom(18);
+      marker.setPosition(result.geometry.location);
+    });
+
+    resultsDiv.appendChild(addressFormatted);
+    resultsDiv.appendChild(buttonShowOnMap);
+  });
+
+  resultsContainer.appendChild(resultsDiv);
 }

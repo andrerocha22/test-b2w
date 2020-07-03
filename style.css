@@ -52,8 +52,45 @@ header {
   height: 600px;
 }
 
+.results {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #2b2b2b;
+}
+
+.results-quant {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 .results-container {
   display: flex;
   width: 100%;
   padding: 2rem;
+}
+
+.result-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.result-card .button-show {
+  padding: 8px 16px;
+  width: fit-content;
+  background-color: #f19935;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.result-card .address-formatted {
+  font-weight: 500;
+  margin-bottom: 1rem;
 }

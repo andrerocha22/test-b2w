@@ -49,7 +49,15 @@ function addAddress(results) {
   const resultsDiv = document.createElement("div");
   resultsDiv.classList.add("results");
 
+  const resultsQuant = document.createElement("h2");
+  resultsQuant.classList.add("results-quant");
+  resultsQuant.innerText = `Resultados encontrados: ${results.length}`;
+  resultsDiv.appendChild(resultsQuant);
+
   results.forEach((result) => {
+    const resultCard = document.createElement("div");
+    resultCard.classList.add("result-card");
+
     const addressFormatted = document.createElement("h3");
     addressFormatted.innerText = result.formatted_address;
     addressFormatted.classList.add("address-formatted");
@@ -63,9 +71,16 @@ function addAddress(results) {
       marker.setPosition(result.geometry.location);
     });
 
-    resultsDiv.appendChild(addressFormatted);
-    resultsDiv.appendChild(buttonShowOnMap);
+    resultCard.appendChild(addressFormatted);
+    resultCard.appendChild(buttonShowOnMap);
+    resultsDiv.appendChild(resultCard);
   });
+
+  if (results.length === 1) {
+    map.setCenter(results[0].geometry.location);
+    map.setZoom(18);
+    marker.setPosition(results[0].geometry.location);
+  }
 
   resultsContainer.appendChild(resultsDiv);
 }

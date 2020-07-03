@@ -31,7 +31,7 @@
         <input
           type="text"
           class="address-input"
-          placeholder="Digite um endereço"
+          placeholder="Digite um endereço para começar"
         />
         <button class="search-button" type="submit">
           <i class="fas fa-search"></i>
@@ -40,7 +40,11 @@
     </header>
 
     <div class="container">
-      <div class="results-container"></div>
+      <div class="results-container">
+        <div class="results-msg-wall">
+          <i class="fas fa-search-location"></i>
+        </div>
+      </div>
 
       <div class="map-container">
         <div id="map"></div>
@@ -56,7 +60,7 @@
     <footer>
       Made with
       <i class="fas fa-heart"></i>
-      by Andre Rocha
+      by André Rocha
     </footer>
 
     <script src="./app.js"></script>

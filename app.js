@@ -5,7 +5,6 @@ const searchButton = document.querySelector(".search-button");
 const resultsContainer = document.querySelector(".results-container");
 const mapBkWall = document.querySelector(".map-bk-wall");
 
-
 //Event Listeners
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -45,6 +44,10 @@ function initMap() {
 function addAddress(results) {
   resultsContainer.innerHTML = "";
 
+  if (mapBkWall.classList.contains("disabled")) {
+    mapBkWall.classList.toggle("disabled");
+  }
+
   const resultsDiv = document.createElement("div");
   resultsDiv.classList.add("results");
 
@@ -54,8 +57,6 @@ function addAddress(results) {
   resultsDiv.appendChild(resultsQuant);
 
   results.forEach((result) => {
-    mapBkWall.classList.toggle("disabled");
-
     const resultCard = document.createElement("div");
     resultCard.classList.add("result-card");
 
@@ -67,6 +68,10 @@ function addAddress(results) {
     buttonShowOnMap.innerText = "Ver no mapa";
     buttonShowOnMap.classList.add("button-show");
     buttonShowOnMap.addEventListener("click", (e) => {
+      if (!mapBkWall.classList.contains("disabled")) {
+        mapBkWall.classList.toggle("disabled");
+      }
+
       map.setCenter(result.geometry.location);
       map.setZoom(18);
       marker.setPosition(result.geometry.location);

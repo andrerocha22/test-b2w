@@ -3,9 +3,8 @@
 const addressInput = document.querySelector(".address-input");
 const searchButton = document.querySelector(".search-button");
 const resultsContainer = document.querySelector(".results-container");
-// const userAddress = navigator.geolocation.getCurrentPosition((e) => {
-//   console.log(e.coords);
-// });
+const mapBkWall = document.querySelector(".map-bk-wall");
+
 
 //Event Listeners
 searchButton.addEventListener("click", (e) => {
@@ -55,6 +54,8 @@ function addAddress(results) {
   resultsDiv.appendChild(resultsQuant);
 
   results.forEach((result) => {
+    mapBkWall.classList.toggle("disabled");
+
     const resultCard = document.createElement("div");
     resultCard.classList.add("result-card");
 

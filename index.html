@@ -24,11 +24,15 @@
   </head>
   <body>
     <header>
-      <h1>
-        Search Address
+      <h1 class="title-page">
+        SA - Buscador de Endereços
       </h1>
       <form>
-        <input type="text" class="address-input" />
+        <input
+          type="text"
+          class="address-input"
+          placeholder="Digite um endereço"
+        />
         <button class="search-button" type="submit">
           <i class="fas fa-search"></i>
         </button>
@@ -40,9 +44,20 @@
 
       <div class="map-container">
         <div id="map"></div>
-        <!-- <div id="map-bk-wall"></div> -->
+        <div class="map-bk-wall">
+          <h3>
+            <i class="fas fa-arrow-left"></i>
+            Selecione um endereço para ver no mapa
+          </h3>
+        </div>
       </div>
     </div>
+
+    <footer>
+      Made with
+      <i class="fas fa-heart"></i>
+      by Andre Rocha
+    </footer>
 
     <script src="./app.js"></script>
   </body>

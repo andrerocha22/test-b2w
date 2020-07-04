@@ -41,6 +41,28 @@ function initMap() {
   marker.setMap(map);
 }
 
+function handleClick(result, id) {
+  if (!mapBkWall.classList.contains("disabled")) {
+    mapBkWall.classList.toggle("disabled");
+  }
+
+  const results = document.querySelector(".results");
+
+  results.childNodes.forEach((child) => {
+    if (child.id != id) {
+      if (child.classList.contains("choosed"))
+        child.classList.toggle("choosed");
+    } else {
+      if (!child.classList.contains("choosed"))
+        child.classList.toggle("choosed");
+    }
+  });
+
+  map.setCenter(result.geometry.location);
+  map.setZoom(18);
+  marker.setPosition(result.geometry.location);
+}
+
 function addAddress(results) {
   resultsContainer.innerHTML = "";
 
@@ -56,8 +78,9 @@ function addAddress(results) {
   resultsQuant.innerText = `Resultados encontrados: ${results.length}`;
   resultsDiv.appendChild(resultsQuant);
 
-  results.forEach((result) => {
+  results.forEach((result, index) => {
     const resultCard = document.createElement("div");
+    resultCard.id = index;
     resultCard.classList.add("result-card");
 
     const addressFormatted = document.createElement("h3");
@@ -67,15 +90,8 @@ function addAddress(results) {
     const buttonShowOnMap = document.createElement("button");
     buttonShowOnMap.innerText = "Ver no mapa";
     buttonShowOnMap.classList.add("button-show");
-    buttonShowOnMap.addEventListener("click", (e) => {
-      if (!mapBkWall.classList.contains("disabled")) {
-        mapBkWall.classList.toggle("disabled");
-      }
-
-      map.setCenter(result.geometry.location);
-      map.setZoom(18);
-      marker.setPosition(result.geometry.location);
-    });
+    buttonShowOnMap.id = index;
+    buttonShowOnMap.addEventListener("click", () => handleClick(result, index));
 
     resultCard.appendChild(addressFormatted);
     resultCard.appendChild(buttonShowOnMap);
@@ -83,6 +99,12 @@ function addAddress(results) {
   });
 
   if (results.length === 1) {
+    resultsDiv.childNodes[1].classList.toggle("choosed");
+
+    if (!mapBkWall.classList.contains("disabled")) {
+      mapBkWall.classList.toggle("disabled");
+    }
+
     map.setCenter(results[0].geometry.location);
     map.setZoom(18);
     marker.setPosition(results[0].geometry.location);

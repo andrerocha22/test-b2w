@@ -10,7 +10,6 @@ searchButton.addEventListener("click", (e) => {
   e.preventDefault();
   let address = addressInput.value;
   let addr = address.replace(/\s/g, "+");
-  console.log(addr);
   const Http = new XMLHttpRequest();
   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=AIzaSyBycYVdSibUl5MysjjhuyZdTbyyrkqD510`;
   Http.open("GET", url);
@@ -19,7 +18,6 @@ searchButton.addEventListener("click", (e) => {
 
   Http.onreadystatechange = function () {
     if (Http.status == 200 && Http.readyState == 4) {
-      console.log(Http.response);
       addAddress(Http.response.results);
     }
   };
@@ -41,6 +39,12 @@ function initMap() {
   marker.setMap(map);
 }
 
+function setMapData(location) {
+  map.setCenter(location.geometry.location);
+  map.setZoom(18);
+  marker.setPosition(location.geometry.location);
+}
+
 function handleClick(result, id) {
   if (!mapBkWall.classList.contains("disabled")) {
     mapBkWall.classList.toggle("disabled");
@@ -58,9 +62,7 @@ function handleClick(result, id) {
     }
   });
 
-  map.setCenter(result.geometry.location);
-  map.setZoom(18);
-  marker.setPosition(result.geometry.location);
+  setMapData(result);
 }
 
 function addAddress(results) {
@@ -104,10 +106,7 @@ function addAddress(results) {
     if (!mapBkWall.classList.contains("disabled")) {
       mapBkWall.classList.toggle("disabled");
     }
-
-    map.setCenter(results[0].geometry.location);
-    map.setZoom(18);
-    marker.setPosition(results[0].geometry.location);
+    setMapData(results[0]);
   }
 
   resultsContainer.appendChild(resultsDiv);

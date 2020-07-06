@@ -1,5 +1,4 @@
 //Selectors
-
 const addressInput = document.querySelector(".address-input");
 const searchButton = document.querySelector(".search-button");
 const resultsContainer = document.querySelector(".results-container");
@@ -11,7 +10,8 @@ searchButton.addEventListener("click", (e) => {
   let address = addressInput.value;
   let addr = address.replace(/\s/g, "+");
   const Http = new XMLHttpRequest();
-  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=AIzaSyBycYVdSibUl5MysjjhuyZdTbyyrkqD510`;
+  //Adiconar key para utilizar a API
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=YOUR_KEY_HERE`;
   Http.open("GET", url);
   Http.responseType = "json";
   Http.send();
@@ -50,6 +50,7 @@ function handleClick(result, id) {
     mapBkWall.classList.toggle("disabled");
   }
 
+  //Do not exist before search an address
   const results = document.querySelector(".results");
 
   results.childNodes.forEach((child) => {

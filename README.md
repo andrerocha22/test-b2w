@@ -8,7 +8,9 @@ Javascript Vanilla, Maps Javascript API, Geocoding API e Ajax.
 
 ## Instalação
 
-Faça o download ou clone esse repositório para testar
+Faça o download ou clone esse repositório para testar.
+
+- Será necessário adicionar uma chave para acessar a API Geocode e Maps do Google
 
 ## License
 
